@@ -1,5 +1,10 @@
 .gradle
 /local.properties
+gradlew
+build.gradle
+gradle/
+gradlew.bat
+settings.gradle
 
 .DS_Store
 # built application files
