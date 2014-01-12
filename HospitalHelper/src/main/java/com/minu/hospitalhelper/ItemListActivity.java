@@ -48,6 +48,9 @@ public class ItemListActivity extends FragmentActivity
                     .findFragmentById(R.id.item_list))
                     .setActivateOnItemClick(true);
         }
+        onItemSelected("1");
+        ((ItemListFragment) getSupportFragmentManager().findFragmentById(R.id.item_list)).getListView().setItemChecked(0, true);
+        //((ItemListFragment) getSupportFragmentManager().findFragmentById(R.id.item_list)).setSelection(0);
 
         // TODO: If exposing deep links into your app, handle intents here.
     }
