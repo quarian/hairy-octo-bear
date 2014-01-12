@@ -9,8 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
+import android.widget.Toast;
+
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.minu.hospitalhelper.content.Content;
 
 import java.util.ArrayList;
@@ -98,6 +104,22 @@ public class ItemDetailFragment extends Fragment {
                 if (!hh.getEntertainmentOn()) {
                     rootView = inflater.inflate(R.layout.entertainment, container, false);
                     hh.setEntertainmentView(rootView);
+                    YouTubePlayerSupportFragment yf =
+                            (YouTubePlayerSupportFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);
+                    yf.initialize("AIzaSyArm2Gl7RYa7h_olXHjM6zSPMTpzkcmY8A", new YouTubePlayer.OnInitializedListener() {
+                        @Override
+                        public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                            if (!b) {
+                                youTubePlayer.cueVideo("Kdgt1ZHkvnM");
+                            }
+                        }
+                        @Override
+                        public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                            // Something failed!
+                            Toast.makeText(getActivity().getBaseContext(),
+                                    "Initializing YouTube failed miserably.", Toast.LENGTH_LONG).show();
+                        }
+                    });
                     hh.setEntertainmentOn(true);
                 } else {
                     ViewGroup parent = (ViewGroup) hh.getEntertainmentView().getParent();

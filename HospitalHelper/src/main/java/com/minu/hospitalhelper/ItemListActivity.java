@@ -78,4 +78,9 @@ public class ItemListActivity extends FragmentActivity
             startActivity(detailIntent);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
