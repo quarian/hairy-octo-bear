@@ -53,22 +53,28 @@ public class ItemDetailFragment extends Fragment {
 
         if (mItem != null) {
             if (mItem.id == 1) {
-                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                // Welcome
+                rootView = inflater.inflate(R.layout.welcome, container, false);
                 ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 2) {
-                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                // Your visit
+                rootView = inflater.inflate(R.layout.visit, container, false);
                 ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 3) {
-                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                // Hospital map
+                rootView = inflater.inflate(R.layout.map, container, false);
                 ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 4) {
-                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                // Medical events
+                rootView = inflater.inflate(R.layout.events, container, false);
                 ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 5) {
-                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                // Medical history
+                rootView = inflater.inflate(R.layout.history, container, false);
                 ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 6) {
-                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                // Entertainment
+                rootView = inflater.inflate(R.layout.entertainment, container, false);
                 ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             }
         }
