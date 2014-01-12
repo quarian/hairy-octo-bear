@@ -61,4 +61,8 @@ public class HospitalHelper extends Application {
         entertainmentView = null;
     }
 
+    public void setUpBeforeLoggingOut() {
+        justStarted = true;
+    }
+
 }

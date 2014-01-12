@@ -14,6 +14,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:hint="Write a message about your reservation (optional)"
+            android:inputType="textPersonName"
+            android:imeOptions="actionDone"
             android:layout_gravity="center_horizontal" />
 
         <LinearLayout

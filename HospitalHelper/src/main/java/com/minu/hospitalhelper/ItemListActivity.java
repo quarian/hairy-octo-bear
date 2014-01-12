@@ -1,8 +1,13 @@
 package com.minu.hospitalhelper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 
 /**
@@ -86,14 +91,52 @@ public class ItemListActivity extends FragmentActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.master, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.logout:
+                logoutDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onBackPressed() {
-        ((HospitalHelper) getApplication()).setUpBeforeClosing();
-        finish();
+        logoutDialog();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         ((HospitalHelper) getApplication()).setUpBeforeClosing();
+    }
+
+    public void logoutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to log out?")
+                .setTitle("Logout");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                ((HospitalHelper) getApplication()).setUpBeforeLoggingOut();
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // No logging out, just shut down the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
