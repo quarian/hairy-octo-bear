@@ -63,7 +63,7 @@ public class ItemDetailFragment extends Fragment {
             } else if (mItem.id == 3) {
                 // Hospital map
                 rootView = inflater.inflate(R.layout.map, container, false);
-                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+                //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 4) {
                 // Medical events
                 rootView = inflater.inflate(R.layout.events, container, false);
