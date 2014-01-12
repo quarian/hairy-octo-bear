@@ -2,11 +2,13 @@ package com.minu.hospitalhelper;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.SupportMapFragment;
 import com.minu.hospitalhelper.content.Content;
 
 /**
@@ -62,7 +64,16 @@ public class ItemDetailFragment extends Fragment {
                 //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 3) {
                 // Hospital map
-                rootView = inflater.inflate(R.layout.map, container, false);
+                HospitalHelper hh = (HospitalHelper) this.getActivity().getApplication();
+                if (!hh.getMapInflated()) {
+                    rootView = inflater.inflate(R.layout.map, container, false);
+                    hh.setMapView(rootView);
+                    hh.setMapInflated(true);
+                } else {
+                    ViewGroup parent = (ViewGroup) hh.getMapView().getParent();
+                    parent.removeAllViews();
+                    rootView = hh.getMapView();
+                }
                 //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 4) {
                 // Medical events
