@@ -8,12 +8,14 @@ import android.view.View;
 public class HospitalHelper extends Application {
     private boolean mapInflated;
     private boolean entertainmentOn;
+    private boolean justStarted;
     private View mapView;
     private View entertainmentView;
 
     public HospitalHelper() {
         mapInflated = false;
         entertainmentOn = false;
+        justStarted = true;
     }
 
     public void setMapInflated(boolean result) {
@@ -46,6 +48,17 @@ public class HospitalHelper extends Application {
 
     public void setEntertainmentView(View v) {
         entertainmentView = v;
+    }
+
+    public boolean getJustStarted() { return justStarted; }
+
+    public void setJustStarted(boolean b) { justStarted = b; }
+
+    public void setUpBeforeClosing() {
+        mapInflated = false;
+        entertainmentOn = false;
+        mapView = null;
+        entertainmentView = null;
     }
 
 }
