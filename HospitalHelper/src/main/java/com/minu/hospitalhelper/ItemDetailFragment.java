@@ -19,6 +19,8 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.minu.hospitalhelper.content.Content;
 
+import android.widget.Button;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -57,6 +59,7 @@ public class ItemDetailFragment extends Fragment {
             // to load content from a content provider.
             mItem = Content.ITEM_MAP.get(getArguments().getInt(ARG_ITEM_ID));
         }
+
     }
 
     @Override
@@ -94,6 +97,13 @@ public class ItemDetailFragment extends Fragment {
                 HashMap<String, ArrayList<String>> items = generateItems();
                 ExpandableListAdapter ela = new ExpandableListAdapter(this.getActivity(), headers, items);
                 elv.setAdapter(ela);
+                Button reserve = (Button) rootView.findViewById(R.id.reserveButton);
+                reserve.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
                // ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 5) {
                 // Medical history
@@ -127,6 +137,9 @@ public class ItemDetailFragment extends Fragment {
                     rootView = hh.getEntertainmentView();
                 }
                 //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            } else if (mItem.id == 7) {
+                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             }
         }
 
@@ -140,10 +153,11 @@ public class ItemDetailFragment extends Fragment {
 
     private ArrayList<String> generateHeaders() {
         ArrayList<String> results = new ArrayList<String>();
+        results.add("A reservation with doctor Doctorow in Seattle memorial the 18th of May");
         results.add("Visit on the doctor at 23.9.2013");
         results.add("Visit on the doctor at 10.6.2013");
         results.add("A visit to the pharmacy at 5.4.2013");
-        results.add("A visit to the Arkam psychiatric ward 2.4.2013");
+        results.add("A visit to the Arkham psychiatric ward 2.4.2013");
         return results;
     }
 
@@ -153,6 +167,7 @@ public class ItemDetailFragment extends Fragment {
         ArrayList<String> things2 = new ArrayList<String>();
         ArrayList<String> things3 = new ArrayList<String>();
         ArrayList<String> things4 = new ArrayList<String>();
+        ArrayList<String> things5 = new ArrayList<String>();
         things1.add("A routine visit to doctor McAulkin at the Seattle Memorial Hospital. The patient was diagnosed with fever and ordered to rest.");
         things1.add("Visit log code: 123467asdw472347823476234");
         things2.add("A visit to doctor Hampton due to a skiing accident and a broken arm. A cast was put onto the arm after an X-ray examination.");
@@ -161,10 +176,13 @@ public class ItemDetailFragment extends Fragment {
         things3.add("Visit log code: 12346723asdda47823476234");
         things4.add("A visit to the psychiatric ward of Arkham, Gotham City. DIagnosed with severe mental issues, ordered Prozac.");
         things4.add("Visit log code: kjhk346723472347823476234");
+        things5.add("A reservation with doctor Doctorow in Seattle memorial, an allergy specialist.");
+        things5.add("Reservation code: 8925367ywthws8o7");
+        results.put("A reservation with doctor Doctorow in Seattle memorial the 18th of May", things5);
         results.put("Visit on the doctor at 23.9.2013", things1);
         results.put("Visit on the doctor at 10.6.2013", things2);
         results.put("A visit to the pharmacy at 5.4.2013", things3);
-        results.put("A visit to the Arkam psychiatric ward 2.4.2013", things4);
+        results.put("A visit to the Arkham psychiatric ward 2.4.2013", things4);
         return results;
     }
 }

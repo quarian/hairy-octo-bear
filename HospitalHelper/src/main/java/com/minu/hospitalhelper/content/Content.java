@@ -31,6 +31,7 @@ public class Content {
         addItem(new Item(4, "Your medical events"));
         addItem(new Item(5, "Your medical history"));
         addItem(new Item(6, "Entertainment"));
+        addItem(new Item(7, "Make reservations"));
     }
 
     private static void addItem(Item item) {
