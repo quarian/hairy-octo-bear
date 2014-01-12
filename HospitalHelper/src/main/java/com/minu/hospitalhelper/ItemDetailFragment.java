@@ -113,7 +113,7 @@ public class ItemDetailFragment extends Fragment {
             } else if (mItem.id == 5) {
                 // Medical history
                 rootView = inflater.inflate(R.layout.history, container, false);
-                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+                //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 6) {
                 // Entertainment
                 if (!hh.getEntertainmentOn()) {
