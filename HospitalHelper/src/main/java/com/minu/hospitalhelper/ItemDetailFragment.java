@@ -42,19 +42,41 @@ public class ItemDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = Content.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = Content.ITEM_MAP.get(getArguments().getInt(ARG_ITEM_ID));
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+        View rootView = null;
+
+        if (mItem != null) {
+            if (mItem.id == 1) {
+                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            } else if (mItem.id == 2) {
+                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            } else if (mItem.id == 3) {
+                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            } else if (mItem.id == 4) {
+                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            } else if (mItem.id == 5) {
+                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            } else if (mItem.id == 6) {
+                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            }
+        }
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
+        /*if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
-        }
+        }*/
 
         return rootView;
     }
