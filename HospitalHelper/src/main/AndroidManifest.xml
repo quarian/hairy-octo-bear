@@ -26,7 +26,7 @@
     <application
         android:name="com.minu.hospitalhelper.HospitalHelper"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/medapp_icon_large"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <meta-data
