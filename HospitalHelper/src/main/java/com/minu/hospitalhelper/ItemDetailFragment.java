@@ -1,5 +1,6 @@
 package com.minu.hospitalhelper;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.ExpandableListView;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.minu.hospitalhelper.content.Content;
 
 import java.util.ArrayList;
@@ -56,6 +58,7 @@ public class ItemDetailFragment extends Fragment {
             Bundle savedInstanceState) {
         View rootView = null;
 
+        HospitalHelper hh = (HospitalHelper) this.getActivity().getApplication();
         if (mItem != null) {
             if (mItem.id == 1) {
                 // Welcome
@@ -67,7 +70,6 @@ public class ItemDetailFragment extends Fragment {
                 //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 3) {
                 // Hospital map
-                HospitalHelper hh = (HospitalHelper) this.getActivity().getApplication();
                 if (!hh.getMapInflated()) {
                     rootView = inflater.inflate(R.layout.map, container, false);
                     hh.setMapView(rootView);
@@ -86,8 +88,6 @@ public class ItemDetailFragment extends Fragment {
                 HashMap<String, ArrayList<String>> items = generateItems();
                 ExpandableListAdapter ela = new ExpandableListAdapter(this.getActivity(), headers, items);
                 elv.setAdapter(ela);
-                System.out.println(headers);
-                System.out.println(items);
                // ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 5) {
                 // Medical history
@@ -95,8 +95,16 @@ public class ItemDetailFragment extends Fragment {
                 ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 6) {
                 // Entertainment
-                rootView = inflater.inflate(R.layout.entertainment, container, false);
-                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+                if (!hh.getEntertainmentOn()) {
+                    rootView = inflater.inflate(R.layout.entertainment, container, false);
+                    hh.setEntertainmentView(rootView);
+                    hh.setEntertainmentOn(true);
+                } else {
+                    ViewGroup parent = (ViewGroup) hh.getEntertainmentView().getParent();
+                    parent.removeAllViews();
+                    rootView = hh.getEntertainmentView();
+                }
+                //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             }
         }
 
@@ -112,15 +120,29 @@ public class ItemDetailFragment extends Fragment {
         ArrayList<String> results = new ArrayList<String>();
         results.add("Visit on the doctor at 23.9.2013");
         results.add("Visit on the doctor at 10.6.2013");
+        results.add("A visit to the pharmacy at 5.4.2013");
+        results.add("A visit to the Arkam psychiatric ward 2.4.2013");
         return results;
     }
 
     private HashMap<String, ArrayList<String>> generateItems() {
         HashMap<String, ArrayList<String>> results = new HashMap<String, ArrayList<String>>();
-        ArrayList<String> things = new ArrayList<String>();
-        things.add("Things!");
-        results.put("Visit on the doctor at 23.9.2013", things);
-        results.put("Visit on the doctor at 10.6.2013", things);
+        ArrayList<String> things1 = new ArrayList<String>();
+        ArrayList<String> things2 = new ArrayList<String>();
+        ArrayList<String> things3 = new ArrayList<String>();
+        ArrayList<String> things4 = new ArrayList<String>();
+        things1.add("A routine visit to doctor McAulkin at the Seattle Memorial Hospital. The patient was diagnosed with fever and ordered to rest.");
+        things1.add("Visit log code: 123467asdw472347823476234");
+        things2.add("A visit to doctor Hampton due to a skiing accident and a broken arm. A cast was put onto the arm after an X-ray examination.");
+        things2.add("Visit log code: 12346723472347823dgdfg");
+        things3.add("Patient bough some Prozac at the Illinois Pharmacy");
+        things3.add("Visit log code: 12346723asdda47823476234");
+        things4.add("A visit to the psychiatric ward of Arkham, Gotham City. DIagnosed with severe mental issues, ordered Prozac.");
+        things4.add("Visit log code: kjhk346723472347823476234");
+        results.put("Visit on the doctor at 23.9.2013", things1);
+        results.put("Visit on the doctor at 10.6.2013", things2);
+        results.put("A visit to the pharmacy at 5.4.2013", things3);
+        results.put("A visit to the Arkam psychiatric ward 2.4.2013", things4);
         return results;
     }
 }

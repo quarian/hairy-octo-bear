@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Miro on 12.1.2014.
  */
@@ -19,20 +21,20 @@ import android.widget.TextView;
 // Modified after http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-    private Context _context;
-    private ArrayList<String> _listDataHeader;
-    private HashMap<String, ArrayList<String>> _listDataChild;
+    private Context context;
+    private ArrayList<String> headers;
+    private HashMap<String, ArrayList<String>> items;
 
-    public ExpandableListAdapter(Context context, ArrayList<String> listDataHeader,
-                                 HashMap<String, ArrayList<String>> listChildData) {
-        this._context = context;
-        this._listDataHeader = listDataHeader;
-        this._listDataChild = listChildData;
+    public ExpandableListAdapter(Context context, ArrayList<String> headers,
+                                 HashMap<String, ArrayList<String>> items) {
+        this.context = context;
+        this.headers = headers;
+        this.items = items;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+        return this.items.get(this.headers.get(groupPosition))
                 .get(childPosititon);
     }
 
@@ -48,32 +50,32 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final String childText = (String) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) this._context
+            LayoutInflater inflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.expandable_list_element, null);
         }
 
-        TextView txtListChild = (TextView) convertView
+        TextView item = (TextView) convertView
                 .findViewById(R.id.elementText);
 
-        txtListChild.setText(childText);
+        item.setText(childText);
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+        return this.items.get(this.headers.get(groupPosition))
                 .size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+        return this.headers.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return this.headers.size();
     }
 
     @Override
@@ -86,15 +88,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) this._context
+            LayoutInflater inflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.expandable_list_header, null);
         }
 
-        TextView lblListHeader = (TextView) convertView
+        TextView header = (TextView) convertView
                 .findViewById(R.id.headerText);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
+        header.setTypeface(null, Typeface.BOLD);
+        header.setText(headerTitle);
 
         return convertView;
     }

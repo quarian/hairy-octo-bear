@@ -7,10 +7,13 @@ import android.view.View;
  */
 public class HospitalHelper extends Application {
     private boolean mapInflated;
+    private boolean entertainmentOn;
     private View mapView;
+    private View entertainmentView;
 
     public HospitalHelper() {
-        this.mapInflated = false;
+        mapInflated = false;
+        entertainmentOn = false;
     }
 
     public void setMapInflated(boolean result) {
@@ -28,4 +31,21 @@ public class HospitalHelper extends Application {
     public void setMapView(View v) {
         mapView = v;
     }
+
+    public boolean getEntertainmentOn() {
+        return entertainmentOn;
+    }
+
+    public void setEntertainmentOn(boolean e) {
+        entertainmentOn = e;
+    }
+
+    public View getEntertainmentView() {
+        return entertainmentView;
+    }
+
+    public void setEntertainmentView(View v) {
+        entertainmentView = v;
+    }
+
 }
