@@ -55,11 +55,11 @@ public class ItemDetailFragment extends Fragment {
             if (mItem.id == 1) {
                 // Welcome
                 rootView = inflater.inflate(R.layout.welcome, container, false);
-                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+                //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 2) {
                 // Your visit
                 rootView = inflater.inflate(R.layout.visit, container, false);
-                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+                //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 3) {
                 // Hospital map
                 rootView = inflater.inflate(R.layout.map, container, false);
