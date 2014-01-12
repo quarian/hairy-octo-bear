@@ -29,6 +29,7 @@ import android.widget.Button;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -119,28 +120,20 @@ public class ItemDetailFragment extends Fragment {
                 if (!hh.getEntertainmentOn()) {
                     rootView = inflater.inflate(R.layout.entertainment, container, false);
                     hh.setEntertainmentView(rootView);
-                    YouTubePlayerSupportFragment yf =
-                            (YouTubePlayerSupportFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);
-                    yf.initialize("AIzaSyArm2Gl7RYa7h_olXHjM6zSPMTpzkcmY8A", new YouTubePlayer.OnInitializedListener() {
-                        @Override
-                        public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                            if (!b) {
-                                youTubePlayer.cueVideo("Kdgt1ZHkvnM");
-                            }
-                        }
-                        @Override
-                        public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                            // Something failed!
-                            Toast.makeText(getActivity().getBaseContext(),
-                                    "Initializing YouTube failed miserably.", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    initializeYoutube(getCatVideo());
                     hh.setEntertainmentOn(true);
                 } else {
                     ViewGroup parent = (ViewGroup) hh.getEntertainmentView().getParent();
                     parent.removeAllViews();
                     rootView = hh.getEntertainmentView();
                 }
+                Button moreCats = (Button) rootView.findViewById(R.id.cat_button);
+                moreCats.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        changeVideo(getCatVideo());
+                    }
+                });
                 //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 7) {
                 rootView = inflater.inflate(R.layout.reservation, container, false);
@@ -215,4 +208,54 @@ public class ItemDetailFragment extends Fragment {
         results.put("A visit to the Arkham psychiatric ward 2.4.2013", things4);
         return results;
     }
-}
+
+    private String getCatVideo() {
+        ArrayList<String> videos = new ArrayList<String>();
+        videos.add("FKkejo2dMV4");
+        videos.add("xEhaVhta7sI");
+        videos.add("O2ulyJuvU3Q");
+        videos.add("MImInJDhf-Y");
+        videos.add("QH2-TGUlwu4");
+        videos.add("ctJJrBw7e-c");
+        Random gen = new Random(System.currentTimeMillis());
+        return videos.get(gen.nextInt(videos.size()));
+    }
+
+    private void initializeYoutube(final String video) {
+        YouTubePlayerSupportFragment yf =
+                (YouTubePlayerSupportFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);
+        yf.initialize("AIzaSyArm2Gl7RYa7h_olXHjM6zSPMTpzkcmY8A", new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                if (!b) {
+                    youTubePlayer.cueVideo(video);
+                }
+            }
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                // Something failed!
+                Toast.makeText(getActivity().getBaseContext(),
+                        "Initializing YouTube failed miserably.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void changeVideo(final String video) {
+        YouTubePlayerSupportFragment yf =
+                (YouTubePlayerSupportFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);
+        yf.onDestroy();
+        yf.initialize("AIzaSyArm2Gl7RYa7h_olXHjM6zSPMTpzkcmY8A", new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                    youTubePlayer.cueVideo(video);
+            }
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                // Something failed!
+                Toast.makeText(getActivity().getBaseContext(),
+                        "Initializing YouTube failed miserably.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    }
+
