@@ -10,12 +10,4 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Make new reservations"
-        android:id="@+id/reserveButton"
-        android:layout_gravity="center_horizontal" />
-
-
 </LinearLayout>

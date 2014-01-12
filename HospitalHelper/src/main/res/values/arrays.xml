@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="reason_array">
+        <item>Vaccination</item>
+        <item>Laboratory</item>
+        <item>Dermatology</item>
+        <item>Check-up</item>
+    </string-array>
+    <string-array name="doctor_array">
+        <item>Dr. Nick</item>
+        <item>Dr. Hilbert</item>
+        <item>Dr. Laspwoski</item>
+        <item>Dr. Einstein</item>
+    </string-array>
+</resources>

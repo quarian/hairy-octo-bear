@@ -3,13 +3,18 @@ package com.minu.hospitalhelper;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.minu.hospitalhelper.ItemListActivity;
 
+
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.SupportMapFragment;
@@ -21,6 +26,7 @@ import com.minu.hospitalhelper.content.Content;
 
 import android.widget.Button;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,11 +48,17 @@ public class ItemDetailFragment extends Fragment {
      */
     private Content.Item mItem;
 
+    private ItemListActivity mItemListActivity;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
     public ItemDetailFragment() {
+    }
+
+    public ItemDetailFragment(ItemListActivity lia) {
+        mItemListActivity = lia;
     }
 
     @Override
@@ -97,13 +109,6 @@ public class ItemDetailFragment extends Fragment {
                 HashMap<String, ArrayList<String>> items = generateItems();
                 ExpandableListAdapter ela = new ExpandableListAdapter(this.getActivity(), headers, items);
                 elv.setAdapter(ela);
-                Button reserve = (Button) rootView.findViewById(R.id.reserveButton);
-                reserve.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                });
                // ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 5) {
                 // Medical history
@@ -138,8 +143,33 @@ public class ItemDetailFragment extends Fragment {
                 }
                 //((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             } else if (mItem.id == 7) {
-                rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
-                ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+                rootView = inflater.inflate(R.layout.reservation, container, false);
+
+                Spinner reasonSpinner = (Spinner) rootView.findViewById(R.id.reason);
+                Spinner doctorSpinner = (Spinner) rootView.findViewById(R.id.doctors);
+
+                ArrayAdapter<CharSequence> reasonAdapter = ArrayAdapter.createFromResource(this.getActivity(),
+                        R.array.reason_array, android.R.layout.simple_spinner_item);
+                reasonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+                ArrayAdapter<CharSequence> doctorAdapter = ArrayAdapter.createFromResource(this.getActivity(),
+                        R.array.doctor_array, android.R.layout.simple_spinner_item);
+                doctorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                reasonSpinner.setAdapter(reasonAdapter);
+                doctorSpinner.setAdapter(doctorAdapter);
+
+                TimePicker tp = (TimePicker) rootView.findViewById(R.id.timePicker);
+                tp.setIs24HourView(true);
+                Button reserve = (Button) rootView.findViewById(R.id.reserve);
+                reserve.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getActivity().getBaseContext(),
+                                "Reservation made!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }
 

@@ -16,9 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Name"
         android:padding="10dp"
-        android:selectAllOnFocus="true"
         android:layout_marginTop="5dp"
         android:ems="10"
         android:id="@+id/editText"
@@ -28,9 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:selectAllOnFocus="true"
         android:padding="10dp"
-        android:text="Social Security Number"
+        android:hint="Social Security Number"
         android:id="@+id/editText2"
         android:layout_gravity="center_horizontal" />
 
